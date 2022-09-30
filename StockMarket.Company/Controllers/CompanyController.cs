@@ -29,29 +29,56 @@ namespace StockMarket.Company.Controllers
         }
 
         [HttpPost("register")]
-        public void Register(CompanyDetailsRequest company)
+        public ActionResult Register(CompanyDetailsRequest company)
         {
-            var result= _companyService.RegisterCompany(company);
+            try
+            {
+                return Ok(_companyService.RegisterCompany(company));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         [HttpGet("info")]
-        public ActionResult<List<CompanyDetails>> GetCompanyDetails(string companyCode)
-        { 
-            var result= _companyService.GetCompanyDetails(companyCode);
-            return result;
+        public ActionResult GetCompanyDetails(string companyCode)
+        {
+            try
+            {                
+                return Ok(_companyService.GetCompanyDetails(companyCode));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+           
         }
 
         [HttpGet("getall")]
-        public ActionResult<List<CompanyDetails>> GetCompanyDetails()
-        {
-            var result = _companyService.GetAllCompanyDetails();
-            return result;
+        public ActionResult GetCompanyDetails()
+        {            
+            try
+            {
+                return Ok(_companyService.GetAllCompanyDetails());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         [HttpPost("delete")]
-        public void DeleteCompany(string companyCode)
-        {
-            var result = _companyService.DeleteCompanyDetails(companyCode);
+        public ActionResult DeleteCompany(string companyCode)
+        {            
+            try
+            {
+                return Ok(_companyService.DeleteCompanyDetails(companyCode));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         //[HttpPost("AddStock")]

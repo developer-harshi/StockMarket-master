@@ -27,29 +27,56 @@ namespace StockMarket.Stock.Controllers
             return "Hello from StockController API Service";
         }
         [HttpPost("add")]
-        public void AddStockPrice(StockDetailsRequest stockDetailsRequest)
+        public ActionResult AddStockPrice(StockDetailsRequest stockDetailsRequest)
         {
-            var result = _stockService.AddStockDetails(stockDetailsRequest);
+            
+            try
+            {
+                return Ok(_stockService.AddStockDetails(stockDetailsRequest));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         [HttpGet("get")]
-        public ActionResult<List<StockDetails>> GetAllStockDetails()
-        {
-            var result = _stockService.GetAllStockDetails();
-            return result;
+        public ActionResult GetAllStockDetails()
+        {            
+            try
+            {
+                return Ok(_stockService.GetAllStockDetails());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         [HttpPost("delete")]
-        public void DeleteStock(string id)
-        {
-            var result = _stockService.DeleteStockDetails(id);
+        public ActionResult DeleteStock(string id)
+        {            
+            try
+            {
+                return Ok(_stockService.DeleteStockDetails(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         [HttpGet("Fetch")]
-        public ActionResult<List<StockDetails>> GetStockDetails(DateTime startDate,DateTime endDate)
-        {
-            var result = _stockService.GetStockDetails(startDate,endDate);
-            return result;
+        public ActionResult GetStockDetails(DateTime startDate,DateTime endDate)
+        {            
+            try
+            {
+                return Ok(_stockService.GetStockDetails(startDate, endDate));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
     }
 }

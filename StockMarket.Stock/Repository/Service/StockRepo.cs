@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace StockMarket.Stock.Repository.Service
 {
-    public class StockRepo:IStockRepo
+    public class StockRepo : IStockRepo
     {
         private readonly IMongoCollection<StockDetails> _stockDetails;
 
         public StockRepo(IStockDatabaseSettings settings, IMongoClient mongoClient)
         {
-            var database = mongoClient.GetDatabase(settings.DatabaseName); 
+            var database = mongoClient.GetDatabase(settings.DatabaseName);
             _stockDetails = database.GetCollection<StockDetails>(settings.StockDetailsCollectionName);
         }
 
@@ -40,16 +40,22 @@ namespace StockMarket.Stock.Repository.Service
             }
             catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
 
         }
 
         public List<StockDetails> GetAllStockPriceDetails()
         {
-            var stockInfo = _stockDetails.Find(d => d.IsDelete == 0).ToList();
-
-            return stockInfo;
+            try
+            {
+                var stockInfo = _stockDetails.Find(d => d.IsDelete == 0).ToList();
+                return stockInfo;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public bool DeleteStock(string id)
@@ -61,17 +67,24 @@ namespace StockMarket.Stock.Repository.Service
                 _stockDetails.UpdateOne(filter, update);
                 return true;
             }
-            catch (Exception msg)
+            catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
 
         }
 
         public List<StockDetails> GetStockDetails(DateTime startDate, DateTime endDate)
         {
-            var stockInfo = _stockDetails.Find(d => d.StartDate >= (DateTime?)startDate && d.EndDate <= (DateTime?)endDate).ToList();
-            return stockInfo;
+            try
+            {
+                var stockInfo = _stockDetails.Find(d => d.StartDate >= (DateTime?)startDate && d.EndDate <= (DateTime?)endDate).ToList();
+                return stockInfo;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

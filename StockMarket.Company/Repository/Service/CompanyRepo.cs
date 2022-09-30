@@ -11,8 +11,8 @@ using System.Threading.Tasks;
 
 namespace StockMarket.Company.Repository.Service
 {
-    
-    public class CompanyRepo:ICompanyRepo
+
+    public class CompanyRepo : ICompanyRepo
     {
         private readonly IMongoCollection<CompanyDetails> _companyDetails;
         private readonly IMongoCollection<StockDetails> _stockDetails;
@@ -21,7 +21,7 @@ namespace StockMarket.Company.Repository.Service
             var database = mongoClient.GetDatabase(settings.DatabaseName);
             _companyDetails = database.GetCollection<CompanyDetails>(settings.StockCollectionName);
             _stockDetails = database.GetCollection<StockDetails>(settings.StockDetailsCollectionName);
-        } 
+        }
 
 
         public bool RegisterCompany(CompanyDetailsRequest company)
@@ -34,7 +34,7 @@ namespace StockMarket.Company.Repository.Service
                 companyDetails.CompanyName = company.CompanyName;
                 companyDetails.CompanyTurnOver = company.CompanyTurnOver;
                 companyDetails.CompanyWebsite = company.CompanyWebsite;
-                companyDetails.stockExchangeEnum =Convert.ToInt32(company.stockExchangeEnum);
+                companyDetails.stockExchangeEnum = Convert.ToInt32(company.stockExchangeEnum);
                 companyDetails.IsDelete = 0;
                 companyDetails.InsertDate = DateTime.Now;
 
@@ -43,52 +43,56 @@ namespace StockMarket.Company.Repository.Service
             }
             catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
 
         }
 
         public List<CompanyDetails> GetCompanyDetails(string companyCode)
         {
-            #region
-            var companyDetails = new CompanyDetailsResponse();
-             CompanyDetailsResponseList  companyDetailsList = new CompanyDetailsResponseList();
-            #endregion
-             
-             var company = _companyDetails.Find(u => u.CompanyCode == companyCode).ToList();
-             
- 
+            try
+            {
+                //var companyDetails = new CompanyDetailsResponse();
+                //CompanyDetailsResponseList companyDetailsList = new CompanyDetailsResponseList();
+                var company = _companyDetails.Find(u => u.CompanyCode == companyCode).ToList();
+                return company;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
-            return company;
-            //return user;
         }
 
         public List<CompanyDetails> GetAllCompanyDetails()
         {
-            #region
-            var companyDetails = new CompanyDetailsResponse();
-            CompanyDetailsResponseList companyDetailsList = new CompanyDetailsResponseList();
-            #endregion
+            try
+            {
+                //var companyDetails = new CompanyDetailsResponse();
+                //CompanyDetailsResponseList companyDetailsList = new CompanyDetailsResponseList();        
+                var company = _companyDetails.Find(d => d.IsDelete == 0).ToList();
+                return company;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
-            var company = _companyDetails.Find(d=>d.IsDelete==0).ToList(); 
-
-            return company;
-            //return user;
         }
-       
+
 
         public bool DeleteCompany(string companyCode)
         {
             try
             {
                 var filter = Builders<CompanyDetails>.Filter.Eq(e => e.CompanyCode, companyCode);
-                var update = Builders<CompanyDetails>.Update.Set(t => t.IsDelete,1);
+                var update = Builders<CompanyDetails>.Update.Set(t => t.IsDelete, 1);
                 _companyDetails.UpdateOne(filter, update);
                 return true;
             }
-            catch (Exception msg)
+            catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
 
         }
@@ -102,27 +106,32 @@ namespace StockMarket.Company.Repository.Service
                 stockDetails.StockPrice = stockDetailsRequest.StockPrice;
                 stockDetails.StockMaxPrice = stockDetailsRequest.StockMaxPrice;
                 stockDetails.StockMinPrice = stockDetailsRequest.StockMinPrice;
-                stockDetails.StockAveragePrice = stockDetailsRequest.StockAveragePrice; 
-                stockDetails.StartDate = stockDetailsRequest.StartDate; 
-                stockDetails.EndDate = stockDetailsRequest.EndDate; 
+                stockDetails.StockAveragePrice = stockDetailsRequest.StockAveragePrice;
+                stockDetails.StartDate = stockDetailsRequest.StartDate;
+                stockDetails.EndDate = stockDetailsRequest.EndDate;
                 stockDetails.IsDelete = 0;
                 stockDetails.InsertDate = DateTime.Now;
-
                 _stockDetails.InsertOne(stockDetails);
                 return true;
             }
             catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
 
         }
 
         public List<StockDetails> GetAllStockPriceDetails()
         {
-            var stockInfo = _stockDetails.Find(d => d.IsDelete == 0).ToList();
-
-            return stockInfo;
+            try
+            {
+                var stockInfo = _stockDetails.Find(d => d.IsDelete == 0).ToList();
+                return stockInfo;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public bool DeleteStock(string id)
@@ -134,9 +143,9 @@ namespace StockMarket.Company.Repository.Service
                 _stockDetails.UpdateOne(filter, update);
                 return true;
             }
-            catch (Exception msg)
+            catch (Exception ex)
             {
-                return false;
+                throw ex;
             }
 
         }
