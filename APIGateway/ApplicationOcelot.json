@@ -1,0 +1,161 @@
+{
+  "ReRoutes": [
+
+    {
+
+      "DownstreamPathTemplate": "/api/v1.0/market/company/register",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44357"
+        }
+      ],
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //},
+      "UpstreamPathTemplate": "/api/v1.0/market/company/register",
+      "UpstreamHttpMethod": [ "POST" ],
+      "SwaggerKey": "Company"
+
+    },
+    {
+
+      "DownstreamPathTemplate": "/api/v1.0/market/company/info",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44357"
+        }
+      ],
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //},
+      "UpstreamPathTemplate": "/api/v1.0/market/company/info",
+      "UpstreamHttpMethod": [ "GET", "POST" ],
+      "SwaggerKey": "Company"
+
+    },
+    {
+
+      "DownstreamPathTemplate": "/api/v1.0/market/company/getall",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44357"
+        }
+      ],
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //},
+      "UpstreamPathTemplate": "/api/v1.0/market/company/getall",
+      "UpstreamHttpMethod": [ "GET", "POST" ],
+      "SwaggerKey": "Company"
+
+    },
+    {
+
+      "DownstreamPathTemplate": "/api/v1.0/market/company/delete",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44357"
+        }
+      ],
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //},
+      "UpstreamPathTemplate": "/api/v1.0/market/company/delete",
+      "UpstreamHttpMethod": [ "GET", "POST" ],
+      "SwaggerKey": "Company"
+
+    },
+    {
+
+      "DownstreamPathTemplate": "/api/v1.0/market/stock/get",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44380"
+        }
+      ],
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //},
+      "UpstreamPathTemplate": "/api/v1.0/market/stock/get",
+      "UpstreamHttpMethod": [ "GET", "POST" ],
+      "SwaggerKey": "Stock"
+
+    },
+    {
+
+      "DownstreamPathTemplate": "/api/v1.0/market/stock/delete",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44380"
+        }
+      ],
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //},
+      "UpstreamPathTemplate": "/api/v1.0/market/stock/delete",
+      "UpstreamHttpMethod": [ "GET", "POST" ],
+      "SwaggerKey": "Stock"
+
+    },
+    {
+
+      "DownstreamPathTemplate": "/api/v1.0/market/stock/add",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44380"
+        }
+      ],
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //},
+      "UpstreamPathTemplate": "/api/v1.0/market/stock/add",
+      "UpstreamHttpMethod": [ "POST" ],
+      "SwaggerKey": "Stock"
+
+    }
+
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "Company",
+      "Config": [
+        {
+          "Name": "Comapny API",
+          "Version": "v1",
+          "Url": "https://localhost:44357/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "Stock",
+      "Config": [
+        {
+          "Name": "Stock API",
+          "Version": "v1",
+          "Url": "https://localhost:44380/swagger/v1/swagger.json"
+        }
+      ]
+    } 
+  ]
+}
