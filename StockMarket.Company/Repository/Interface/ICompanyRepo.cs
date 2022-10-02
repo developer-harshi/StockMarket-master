@@ -22,5 +22,8 @@ namespace StockMarket.Company.Repository.Interface
         List<StockDetails> GetAllStockPriceDetails();
 
         bool DeleteStock(string id);
+        bool AddUser(User user);
+        User GetUser();
+        bool FindUser(string email, string password);
     }
 }

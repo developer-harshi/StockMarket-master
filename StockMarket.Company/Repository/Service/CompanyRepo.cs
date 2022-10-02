@@ -16,11 +16,13 @@ namespace StockMarket.Company.Repository.Service
     {
         private readonly IMongoCollection<CompanyDetails> _companyDetails;
         private readonly IMongoCollection<StockDetails> _stockDetails;
+        public readonly IMongoCollection<User> _user;
         public CompanyRepo(IStockDatabaseSettings settings, IMongoClient mongoClient)
         {
             var database = mongoClient.GetDatabase(settings.DatabaseName);
             _companyDetails = database.GetCollection<CompanyDetails>(settings.StockCollectionName);
             _stockDetails = database.GetCollection<StockDetails>(settings.StockDetailsCollectionName);
+            _user= database.GetCollection<User>(settings.UserCollectionName);
         }
 
 
@@ -142,6 +144,56 @@ namespace StockMarket.Company.Repository.Service
                 var update = Builders<StockDetails>.Update.Set(t => t.IsDelete, 1);
                 _stockDetails.UpdateOne(filter, update);
                 return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+        public bool AddUser(User user)
+        {
+            try
+            {
+                _user.InsertOne(user);
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+        public User GetUser()
+        {
+            try
+            {
+                User user = new User();
+                return user;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public bool FindUser(string email,string password)
+        {
+            try
+            {
+                var user = Builders<User>.Filter;
+                var filter1 = user.Eq(e => e.Email, email);
+                var filter2 = user.Eq(e => e.Password, password);
+                var finalFilter = user.And(filter1, filter2);
+                var filter = _user.Find(finalFilter);
+                if (filter != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch (Exception ex)
             {

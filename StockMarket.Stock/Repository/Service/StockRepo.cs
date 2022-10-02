@@ -86,5 +86,7 @@ namespace StockMarket.Stock.Repository.Service
                 throw ex;
             }
         }
+        
+      
     }
 }

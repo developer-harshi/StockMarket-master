@@ -51,5 +51,15 @@ namespace StockMarket.Company.Services.Service
         {
             return _companyRepo.DeleteStock(id);
         }
+
+        public bool AddUser(User user)
+        {
+            return _companyRepo.AddUser(user);
+        }
+
+        public User GetUser()
+        {
+            return _companyRepo.GetUser();
+        }
     }
 }

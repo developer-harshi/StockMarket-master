@@ -22,6 +22,8 @@ namespace StockMarket.Company.Services.Interface
         List<StockDetails> GetAllStockDetails();
 
         bool DeleteStockDetails(string id);
+        bool AddUser(User user);
+        User GetUser();
 
     }
 }
