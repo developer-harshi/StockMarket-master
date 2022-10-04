@@ -84,7 +84,7 @@ namespace StockMarket.Stock
 
 
             #region Authentication
-            var key = "EStockMarket";
+            var key = "EStockMarket Authentication";
 
             //services.AddSingleton<IJwtAuthenticationManager>(new JwtAuthenticationManager(key, Configuration));
             services.AddAuthentication(x =>

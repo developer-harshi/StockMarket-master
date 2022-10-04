@@ -127,7 +127,7 @@ namespace StockMarket.Company.Controllers
             }
         }
         [AllowAnonymous]
-        [HttpGet("Authenticate")]
+        [HttpPost("authenticate")]
         public IActionResult GetAuthentication(LoginModel loginModel)
         {
             var token = _jwtAuthenticationManager.Authenticate(loginModel.Email, loginModel.Password);
