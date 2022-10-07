@@ -61,5 +61,10 @@ namespace StockMarket.Company.Services.Service
         {
             return _companyRepo.GetUser();
         }
+
+        public CompanyDetails GetCompany(string companyCode)
+        {
+            return _companyRepo.GetCompany(companyCode);
+        }
     }
 }

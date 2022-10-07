@@ -44,7 +44,7 @@ namespace StockMarket.Company.Controllers
             }
         }
 
-        [HttpGet("info")]
+        [HttpGet("info/{companyCode}")]
         public ActionResult GetCompanyDetails(string companyCode)
         {
             try
@@ -71,7 +71,7 @@ namespace StockMarket.Company.Controllers
             }
         }
 
-        [HttpPost("delete")]
+        [HttpGet("delete/{companyCode}")]
         public ActionResult DeleteCompany(string companyCode)
         {
             try
@@ -83,25 +83,7 @@ namespace StockMarket.Company.Controllers
                 return BadRequest(ex);
             }
         }
-
-        //[HttpPost("AddStock")]
-        //public void AddStockPrice(StockDetailsRequest stockDetailsRequest)
-        //{
-        //    var result = _companyService.AddStockDetails(stockDetailsRequest);
-        //}
-
-        //[HttpGet("getAllStockDetails")]
-        //public ActionResult<List<StockDetails>> GetAllStockDetails()
-        //{
-        //    var result = _companyService.GetAllStockDetails();
-        //    return result;
-        //}
-
-        //[HttpPost("DeleteStock")]
-        //public void DeleteStock(string id)
-        //{
-        //    var result = _companyService.DeleteStockDetails(id);
-        //}
+       
         [HttpPost("adduser")]
         public ActionResult AddUser(User user)
         {
@@ -139,6 +121,18 @@ namespace StockMarket.Company.Controllers
             {
                 loginModel.Token = token;
                 return Ok(loginModel);
+            }
+        }
+        [HttpGet("getcompany/{companyCode}")]
+        public ActionResult GetCompany(string companyCode)
+        {
+            try
+            {
+                return Ok(_companyService.GetCompany(companyCode));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
             }
         }
     }

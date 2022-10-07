@@ -25,5 +25,6 @@ namespace StockMarket.Company.Repository.Interface
         bool AddUser(User user);
         User GetUser();
         bool FindUser(string email, string password);
+        CompanyDetails GetCompany(string companyCode);
     }
 }

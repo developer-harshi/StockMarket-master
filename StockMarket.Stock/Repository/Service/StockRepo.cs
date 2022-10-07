@@ -20,22 +20,25 @@ namespace StockMarket.Stock.Repository.Service
             _stockDetails = database.GetCollection<StockDetails>(settings.StockDetailsCollectionName);
         }
 
-        public bool AddStockDetails(StockDetailsRequest stockDetailsRequest)
+        public bool AddStockDetails(List<StockDetailsRequest> listStockDetailsRequest)
         {
             try
             {
-                StockDetails stockDetails = new StockDetails();
-                stockDetails.CompanyCode = stockDetailsRequest.CompanyCode;
-                stockDetails.StockPrice = stockDetailsRequest.StockPrice;
-                stockDetails.StockMaxPrice = stockDetailsRequest.StockMaxPrice;
-                stockDetails.StockMinPrice = stockDetailsRequest.StockMinPrice;
-                stockDetails.StockAveragePrice = stockDetailsRequest.StockAveragePrice;
-                stockDetails.StartDate = stockDetailsRequest.StartDate;
-                stockDetails.EndDate = stockDetailsRequest.EndDate;
-                stockDetails.IsDelete = 0;
-                stockDetails.InsertDate = DateTime.Now;
+                foreach (var stockDetailsRequest in listStockDetailsRequest)
+                {
+                    StockDetails stockDetails = new StockDetails();
+                    stockDetails.CompanyCode = stockDetailsRequest.CompanyCode;
+                    stockDetails.StockPrice = stockDetailsRequest.StockPrice;
+                    stockDetails.StockMaxPrice = stockDetailsRequest.StockMaxPrice;
+                    stockDetails.StockMinPrice = stockDetailsRequest.StockMinPrice;
+                    stockDetails.StockAveragePrice = stockDetailsRequest.StockAveragePrice;
+                    stockDetails.StartDate = stockDetailsRequest.StartDate;
+                    stockDetails.EndDate = stockDetailsRequest.EndDate;
+                    stockDetails.IsDelete = 0;
+                    stockDetails.InsertDate = DateTime.Now;
 
-                _stockDetails.InsertOne(stockDetails);
+                    _stockDetails.InsertOne(stockDetails);
+                }
                 return true;
             }
             catch (Exception ex)
@@ -86,7 +89,11 @@ namespace StockMarket.Stock.Repository.Service
                 throw ex;
             }
         }
-        
-      
+
+        public StockDetailsRequest GetEmptyStock()
+        {
+            StockDetailsRequest stockDetailsRequest = new StockDetailsRequest();
+            return stockDetailsRequest;
+        }
     }
 }

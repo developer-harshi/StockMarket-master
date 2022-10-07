@@ -17,9 +17,9 @@ namespace StockMarket.Stock.Services.Servicee
         {
             _stockRepo = stockRepo;
         }
-        public bool AddStockDetails(StockDetailsRequest stockDetailsRequest)
+        public bool AddStockDetails(List<StockDetailsRequest> listStockDetailsRequest)
         {
-            return _stockRepo.AddStockDetails(stockDetailsRequest);
+            return _stockRepo.AddStockDetails(listStockDetailsRequest);
         }
 
         public List<StockDetails> GetAllStockDetails()
@@ -35,6 +35,11 @@ namespace StockMarket.Stock.Services.Servicee
         public List<StockDetails> GetStockDetails(DateTime startDate, DateTime endDate)
         {
             return _stockRepo.GetStockDetails(startDate, endDate);
+        }
+
+        public StockDetailsRequest GetEmptyStock()
+        {
+            return _stockRepo.GetEmptyStock();
         }
     }
 }

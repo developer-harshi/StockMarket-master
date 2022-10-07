@@ -9,12 +9,13 @@ namespace StockMarket.Stock.Services.Interface
 {
     public interface IStockService
     {
-        bool AddStockDetails(StockDetailsRequest stockDetailsRequest);
+        bool AddStockDetails(List<StockDetailsRequest> listStockDetailsRequest);
 
         List<StockDetails> GetAllStockDetails();
 
         bool DeleteStockDetails(string id);
 
         List<StockDetails> GetStockDetails(DateTime startDate, DateTime endDate);
+        StockDetailsRequest GetEmptyStock();
     }
 }

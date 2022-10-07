@@ -4,7 +4,7 @@
     {
 
       "DownstreamPathTemplate": "/api/v1.0/market/company/register",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -22,7 +22,7 @@
     },
     {
 
-      "DownstreamPathTemplate": "/api/v1.0/market/company/info",
+      "DownstreamPathTemplate": "/api/v1.0/market/company/info/{companyCode}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -34,7 +34,7 @@
       //  "AuthenticationProviderKey": "Bearer",
       //  "AllowedScopes": []
       //},
-      "UpstreamPathTemplate": "/api/v1.0/market/company/info",
+      "UpstreamPathTemplate": "/api/v1.0/market/company/info/{companyCode}",
       "UpstreamHttpMethod": [ "GET", "POST" ],
       "SwaggerKey": "Company"
 
@@ -42,7 +42,7 @@
     {
 
       "DownstreamPathTemplate": "/api/v1.0/market/company/getall",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -60,7 +60,7 @@
     },
     {
 
-      "DownstreamPathTemplate": "/api/v1.0/market/company/delete",
+      "DownstreamPathTemplate": "/api/v1.0/market/company/delete/{companyCode}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -72,8 +72,27 @@
       //  "AuthenticationProviderKey": "Bearer",
       //  "AllowedScopes": []
       //},
-      "UpstreamPathTemplate": "/api/v1.0/market/company/delete",
+      "UpstreamPathTemplate": "/api/v1.0/market/company/delete/{companyCode}",
       "UpstreamHttpMethod": [ "GET", "POST" ],
+      "SwaggerKey": "Company"
+
+    },
+    {
+
+      "DownstreamPathTemplate": "/api/v1.0/market/company/getcompany/{companyCode}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5001"
+        }
+      ],
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //},
+      "UpstreamPathTemplate": "/api/v1.0/market/company/getcompany/{companyCode}",
+      "UpstreamHttpMethod": [ "GET" ],
       "SwaggerKey": "Company"
 
     },
@@ -118,7 +137,7 @@
     {
 
       "DownstreamPathTemplate": "/api/v1.0/market/stock/get",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -136,7 +155,7 @@
     },
     {
 
-      "DownstreamPathTemplate": "/api/v1.0/market/stock/delete",
+      "DownstreamPathTemplate": "/api/v1.0/market/stock/delete/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -148,7 +167,7 @@
       //  "AuthenticationProviderKey": "Bearer",
       //  "AllowedScopes": []
       //},
-      "UpstreamPathTemplate": "/api/v1.0/market/stock/delete",
+      "UpstreamPathTemplate": "/api/v1.0/market/stock/delete/{id}",
       "UpstreamHttpMethod": [ "GET", "POST" ],
       "SwaggerKey": "Stock"
 
@@ -156,7 +175,7 @@
     {
 
       "DownstreamPathTemplate": "/api/v1.0/market/stock/add",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
@@ -171,6 +190,25 @@
       "UpstreamHttpMethod": [ "POST" ],
       "SwaggerKey": "Stock"
 
+    },
+    {
+
+      "DownstreamPathTemplate": "/api/v1.0/market/stock/empty",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5002"
+        }
+      ],
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //},
+      "UpstreamPathTemplate": "/api/v1.0/market/stock/empty",
+      "UpstreamHttpMethod": [ "POST" ],
+      "SwaggerKey": "Stock"
+
     }
 
   ],
@@ -181,7 +219,7 @@
         {
           "Name": "Comapny API",
           "Version": "v1",
-          "Url": "https://localhost:5001/swagger/v1/swagger.json"
+          "Url": "http://localhost:5001/swagger/v1/swagger.json"
         }
       ]
     },
@@ -191,7 +229,7 @@
         {
           "Name": "Stock API",
           "Version": "v1",
-          "Url": "https://localhost:5002/swagger/v1/swagger.json"
+          "Url": "http://localhost:5002/swagger/v1/swagger.json"
         }
       ]
     }

@@ -27,12 +27,12 @@ namespace StockMarket.Stock.Controllers
             return "Hello from StockController API Service";
         }
         [HttpPost("add")]
-        public ActionResult AddStockPrice(StockDetailsRequest stockDetailsRequest)
+        public ActionResult AddStockPrice(List<StockDetailsRequest> listStockDetailsRequest)
         {
             
             try
             {
-                return Ok(_stockService.AddStockDetails(stockDetailsRequest));
+                return Ok(_stockService.AddStockDetails(listStockDetailsRequest));
             }
             catch (Exception ex)
             {
@@ -53,7 +53,7 @@ namespace StockMarket.Stock.Controllers
             }
         }
 
-        [HttpPost("delete")]
+        [HttpGet("delete/{id}")]
         public ActionResult DeleteStock(string id)
         {            
             try
@@ -66,12 +66,25 @@ namespace StockMarket.Stock.Controllers
             }
         }
 
-        [HttpGet("Fetch")]
-        public ActionResult GetStockDetails(DateTime startDate,DateTime endDate)
-        {            
+        [HttpGet("Fetch/{startDate}/{endDate}")]
+        public ActionResult GetStockDetails(DateTime startDate, DateTime endDate)
+        {
             try
             {
                 return Ok(_stockService.GetStockDetails(startDate, endDate));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpGet("empty")]
+        public ActionResult GetEmptystock()
+        {
+            try
+            {
+                return Ok(_stockService.GetEmptyStock());
             }
             catch (Exception ex)
             {

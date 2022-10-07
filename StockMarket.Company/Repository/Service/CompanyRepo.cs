@@ -177,7 +177,7 @@ namespace StockMarket.Company.Repository.Service
                 throw ex;
             }
         }
-        public bool FindUser(string email,string password)
+        public bool FindUser(string email, string password)
         {
             try
             {
@@ -194,6 +194,23 @@ namespace StockMarket.Company.Repository.Service
                 {
                     return false;
                 }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+        public CompanyDetails GetCompany(string companyCode)
+        {
+            try
+            {
+                CompanyDetails company = _companyDetails.Find(u => u.CompanyCode == companyCode).FirstOrDefault();
+                if(company==null)
+                {
+                    company = new CompanyDetails();
+                }
+                return company;
             }
             catch (Exception ex)
             {

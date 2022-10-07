@@ -9,13 +9,15 @@ namespace StockMarket.Stock.Repository.Interface
 {
     public interface IStockRepo
     {
-        bool AddStockDetails(StockDetailsRequest stockDetailsRequest);
+        bool AddStockDetails(List<StockDetailsRequest> listStockDetailsRequest);
 
         List<StockDetails> GetAllStockPriceDetails();
 
         bool DeleteStock(string id);
 
         List<StockDetails> GetStockDetails(DateTime startDate, DateTime endDate);
+
+        StockDetailsRequest GetEmptyStock();
 
     }
 }
