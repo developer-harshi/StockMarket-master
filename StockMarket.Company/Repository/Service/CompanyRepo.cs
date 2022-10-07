@@ -36,7 +36,7 @@ namespace StockMarket.Company.Repository.Service
                 companyDetails.CompanyName = company.CompanyName;
                 companyDetails.CompanyTurnOver = company.CompanyTurnOver;
                 companyDetails.CompanyWebsite = company.CompanyWebsite;
-                companyDetails.stockExchangeEnum = Convert.ToInt32(company.stockExchangeEnum);
+                companyDetails.StockExchangeEnum = Convert.ToInt32(company.stockExchangeEnum);
                 companyDetails.IsDelete = 0;
                 companyDetails.InsertDate = DateTime.Now;
 

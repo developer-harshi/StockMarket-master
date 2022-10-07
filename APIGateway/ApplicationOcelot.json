@@ -206,7 +206,7 @@
       //  "AllowedScopes": []
       //},
       "UpstreamPathTemplate": "/api/v1.0/market/stock/empty",
-      "UpstreamHttpMethod": [ "POST" ],
+      "UpstreamHttpMethod": [ "GET" ],
       "SwaggerKey": "Stock"
 
     }

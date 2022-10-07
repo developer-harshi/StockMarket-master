@@ -24,7 +24,7 @@ namespace StockMarket.Company.Models
         [Required]
         public string CompanyWebsite { get; set; }
          
-        public  int stockExchangeEnum {get;set;}
+        public  int StockExchangeEnum {get;set;}
 
         public int IsDelete { get; set; }
         public DateTime? InsertDate { get; set; }
