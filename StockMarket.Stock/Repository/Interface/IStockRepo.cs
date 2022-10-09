@@ -11,7 +11,7 @@ namespace StockMarket.Stock.Repository.Interface
     {
         bool AddStockDetails(List<StockDetailsRequest> listStockDetailsRequest);
 
-        List<StockDetails> GetAllStockPriceDetails();
+        List<StockDetails> GetAllStockPriceDetails(string companyCode);
 
         bool DeleteStock(string id);
 

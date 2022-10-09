@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StockMarket.Company.Authentication;
 using StockMarket.Company.DTO.Request;
-using StockMarket.Company.DTO.Response;
 using StockMarket.Company.Models;
 using StockMarket.Company.Services.Interface;
 using System;

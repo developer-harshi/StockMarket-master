@@ -40,12 +40,12 @@ namespace StockMarket.Stock.Controllers
             }
         }
 
-        [HttpGet("get")]
-        public ActionResult GetAllStockDetails()
+        [HttpGet("get/{companyCode}")]
+        public ActionResult GetAllStockDetails(string companyCode)
         {            
             try
             {
-                return Ok(_stockService.GetAllStockDetails());
+                return Ok(_stockService.GetAllStockDetails(companyCode));
             }
             catch (Exception ex)
             {

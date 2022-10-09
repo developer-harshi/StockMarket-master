@@ -1,5 +1,4 @@
 ﻿using StockMarket.Company.DTO.Request;
-using StockMarket.Company.DTO.Response;
 using StockMarket.Company.Models;
 using System;
 using System.Collections.Generic;
@@ -16,15 +15,16 @@ namespace StockMarket.Company.Repository.Interface
         List<CompanyDetails> GetAllCompanyDetails();
 
         bool DeleteCompany(string companyCode);
+        #region Commented By me 
+        //bool AddStockDetails(StockDetailsRequest stockDetailsRequest);
 
-        bool AddStockDetails(StockDetailsRequest stockDetailsRequest);
+        //List<StockDetails> GetAllStockPriceDetails();
 
-        List<StockDetails> GetAllStockPriceDetails();
-
-        bool DeleteStock(string id);
+        //bool DeleteStock(string id);
+        #endregion Commented By me 
         bool AddUser(User user);
         User GetUser();
         bool FindUser(string email, string password);
-        CompanyDetails GetCompany(string companyCode);
+        CompanyDetailsRequest GetCompany(string companyCode);
     }
 }

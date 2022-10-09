@@ -18,6 +18,10 @@ namespace StockMarket.Company.DTO.Request
         [Required]
         public string CompanyWebsite { get; set; }
 
-        public string stockExchangeEnum { get; set; } 
+        public string StockExchangeEnum { get; set; }
+
+
+        public bool IsAdd { get; set; }
+        public string UserName { get; set; }
     }
 }

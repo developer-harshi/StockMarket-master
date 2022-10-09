@@ -28,8 +28,10 @@ namespace StockMarket.Company.Models
 
         public int IsDelete { get; set; }
         public DateTime? InsertDate { get; set; }
-        
 
+        public string StockExchange { get; set; }
+        [Required]
+        public string UserName { get; set; }
 
     }
 }

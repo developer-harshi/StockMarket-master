@@ -26,18 +26,29 @@ namespace StockMarket.Stock.Repository.Service
             {
                 foreach (var stockDetailsRequest in listStockDetailsRequest)
                 {
-                    StockDetails stockDetails = new StockDetails();
-                    stockDetails.CompanyCode = stockDetailsRequest.CompanyCode;
-                    stockDetails.StockPrice = stockDetailsRequest.StockPrice;
-                    stockDetails.StockMaxPrice = stockDetailsRequest.StockMaxPrice??0;
-                    stockDetails.StockMinPrice = stockDetailsRequest.StockMinPrice??0;
-                    stockDetails.StockAveragePrice = stockDetailsRequest.StockAveragePrice??0;
-                    stockDetails.StartDate = stockDetailsRequest.StartDate;
-                    stockDetails.EndDate = stockDetailsRequest.EndDate;
-                    stockDetails.IsDelete = 0;
-                    stockDetails.InsertDate = DateTime.Now;
+                    StockDetails stockDetails = _stockDetails.Find(d => d.CompanyCode == stockDetailsRequest.CompanyCode && d.Id == stockDetailsRequest.Id).FirstOrDefault();
+                    if (stockDetails != null)
+                    {
+                        var filter = Builders<StockDetails>.Filter.Eq(e => e.Id, stockDetailsRequest.Id);
+                        var update = Builders<StockDetails>.Update.Set(t => t.StockPrice, stockDetailsRequest.StockPrice);
+                        _stockDetails.UpdateOne(filter, update);
+                    }
+                    else
+                    {
+                         stockDetails = new StockDetails();
+                        stockDetails.CompanyCode = stockDetailsRequest.CompanyCode;
+                        stockDetails.StockPrice = stockDetailsRequest.StockPrice;
+                        stockDetails.StockMaxPrice = stockDetailsRequest.StockMaxPrice ?? 0;
+                        stockDetails.StockMinPrice = stockDetailsRequest.StockMinPrice ?? 0;
+                        stockDetails.StockAveragePrice = stockDetailsRequest.StockAveragePrice ?? 0;
+                        stockDetails.StartDate = stockDetailsRequest.StartDate;
+                        stockDetails.EndDate = stockDetailsRequest.EndDate;
+                        stockDetails.IsDelete = 0;
+                        stockDetails.InsertDate = DateTime.Now;
+                        _stockDetails.InsertOne(stockDetails);
+                    }
 
-                    _stockDetails.InsertOne(stockDetails);
+
                 }
                 return true;
             }
@@ -48,11 +59,11 @@ namespace StockMarket.Stock.Repository.Service
 
         }
 
-        public List<StockDetails> GetAllStockPriceDetails()
+        public List<StockDetails> GetAllStockPriceDetails(string companyCode)
         {
             try
             {
-                var stockInfo = _stockDetails.Find(d => d.IsDelete == 0).ToList();
+                var stockInfo = _stockDetails.Find(d => d.IsDelete == 0 && d.CompanyCode==companyCode).ToList();
                 return stockInfo;
             }
             catch (Exception ex)
@@ -93,6 +104,9 @@ namespace StockMarket.Stock.Repository.Service
         public StockDetailsRequest GetEmptyStock()
         {
             StockDetailsRequest stockDetailsRequest = new StockDetailsRequest();
+            stockDetailsRequest.StartDate = DateTime.Now;
+            //stockDetailsRequest.Id = Guid.NewGuid().ToString();
+            stockDetailsRequest.Index = 0;
             return stockDetailsRequest;
         }
     }

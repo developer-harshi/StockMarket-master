@@ -14,7 +14,7 @@ namespace StockMarket.Stock.DTO.Request
         public decimal StockPrice { get; set; }
         //[Required]
         public decimal? StockMaxPrice { get; set; }
-        [Required]
+        //[Required]
         public decimal? StockMinPrice { get; set; }
         //[Required]
         public decimal? StockAveragePrice { get; set; }
@@ -23,5 +23,7 @@ namespace StockMarket.Stock.DTO.Request
         public DateTime StartDate { get; set; }
         //[Required]
         public DateTime? EndDate { get; set; }
+        public string Id { get; set; }
+        public int Index { get; set; }
     }
 }

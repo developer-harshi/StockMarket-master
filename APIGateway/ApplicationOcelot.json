@@ -136,7 +136,7 @@
     },
     {
 
-      "DownstreamPathTemplate": "/api/v1.0/market/stock/get",
+      "DownstreamPathTemplate": "/api/v1.0/market/stock/get/{companyCode}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -148,7 +148,7 @@
       //  "AuthenticationProviderKey": "Bearer",
       //  "AllowedScopes": []
       //},
-      "UpstreamPathTemplate": "/api/v1.0/market/stock/get",
+      "UpstreamPathTemplate": "/api/v1.0/market/stock/get/{companyCode}",
       "UpstreamHttpMethod": [ "GET", "POST" ],
       "SwaggerKey": "Stock"
 

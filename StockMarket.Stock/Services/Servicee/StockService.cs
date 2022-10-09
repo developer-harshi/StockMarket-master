@@ -22,9 +22,9 @@ namespace StockMarket.Stock.Services.Servicee
             return _stockRepo.AddStockDetails(listStockDetailsRequest);
         }
 
-        public List<StockDetails> GetAllStockDetails()
+        public List<StockDetails> GetAllStockDetails(string companyCode)
         {
-            return _stockRepo.GetAllStockPriceDetails();
+            return _stockRepo.GetAllStockPriceDetails(companyCode);
         }
 
         public bool DeleteStockDetails(string id)
