@@ -18,18 +18,18 @@ namespace StockMarket.Stock.Models
 
         [Required]
         public decimal StockPrice { get; set; }
-        [Required]
+        //[Required]
         public decimal StockMaxPrice { get; set; }
-        [Required]
+        //[Required]
         public decimal StockMinPrice { get; set; }
-        [Required]
+        //[Required]
         public decimal StockAveragePrice { get; set; }
 
-        public int IsDelete { get; set; }
+        public int? IsDelete { get; set; }
         public DateTime? InsertDate { get; set; }
         [Required]
         public DateTime? StartDate { get; set; }
-        [Required]
+        //[Required]
         public DateTime? EndDate { get; set; }
     }
 }

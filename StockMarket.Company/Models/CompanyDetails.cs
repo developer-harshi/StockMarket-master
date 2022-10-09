@@ -28,7 +28,7 @@ namespace StockMarket.Company.Models
 
         public int IsDelete { get; set; }
         public DateTime? InsertDate { get; set; }
-
+        
 
 
     }

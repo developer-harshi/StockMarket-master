@@ -29,9 +29,9 @@ namespace StockMarket.Stock.Repository.Service
                     StockDetails stockDetails = new StockDetails();
                     stockDetails.CompanyCode = stockDetailsRequest.CompanyCode;
                     stockDetails.StockPrice = stockDetailsRequest.StockPrice;
-                    stockDetails.StockMaxPrice = stockDetailsRequest.StockMaxPrice;
-                    stockDetails.StockMinPrice = stockDetailsRequest.StockMinPrice;
-                    stockDetails.StockAveragePrice = stockDetailsRequest.StockAveragePrice;
+                    stockDetails.StockMaxPrice = stockDetailsRequest.StockMaxPrice??0;
+                    stockDetails.StockMinPrice = stockDetailsRequest.StockMinPrice??0;
+                    stockDetails.StockAveragePrice = stockDetailsRequest.StockAveragePrice??0;
                     stockDetails.StartDate = stockDetailsRequest.StartDate;
                     stockDetails.EndDate = stockDetailsRequest.EndDate;
                     stockDetails.IsDelete = 0;
