@@ -92,9 +92,8 @@ namespace StockMarket.Stock.Repository.Service
         {
             try
             {
-                var filter = Builders<StockDetails>.Filter.Eq(e => e.Id, id);
-                var update = Builders<StockDetails>.Update.Set(t => t.IsDelete, 1);
-                _stockDetails.UpdateOne(filter, update);
+                var deleteFilter = Builders<StockDetails>.Filter.Eq(e => e.Id, id);
+                _stockDetails.DeleteOne(deleteFilter);
                 return true;
             }
             catch (Exception ex)
