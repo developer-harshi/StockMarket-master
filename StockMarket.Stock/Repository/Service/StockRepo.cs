@@ -24,18 +24,33 @@ namespace StockMarket.Stock.Repository.Service
         {
             try
             {
+                List<StockDetails> lstStockDetails = _stockDetails.Find(d => d.CompanyCode == (listStockDetailsRequest.FirstOrDefault().CompanyCode)).ToList();
+                lstStockDetails = lstStockDetails == null ? new List<StockDetails>() : lstStockDetails;
+                if(lstStockDetails.Count>0)
+                {
+                    foreach(var stock in lstStockDetails)
+                    {
+                        var stock1 = listStockDetailsRequest.Where(c => c.Id == stock.Id).FirstOrDefault();
+                        if(stock1==null)
+                        {
+                            var deleteFilter = Builders<StockDetails>.Filter.Eq(e => e.Id, stock.Id);
+                            _stockDetails.DeleteOne(deleteFilter);
+                        }
+                    }
+                }
                 foreach (var stockDetailsRequest in listStockDetailsRequest)
                 {
-                    StockDetails stockDetails = _stockDetails.Find(d => d.CompanyCode == stockDetailsRequest.CompanyCode && d.Id == stockDetailsRequest.Id).FirstOrDefault();
+                    StockDetails stockDetails = lstStockDetails.Where(d => d.CompanyCode == stockDetailsRequest.CompanyCode && d.Id == stockDetailsRequest.Id).FirstOrDefault();
                     if (stockDetails != null)
                     {
                         var filter = Builders<StockDetails>.Filter.Eq(e => e.Id, stockDetailsRequest.Id);
                         var update = Builders<StockDetails>.Update.Set(t => t.StockPrice, stockDetailsRequest.StockPrice);
                         _stockDetails.UpdateOne(filter, update);
                     }
+
                     else
                     {
-                         stockDetails = new StockDetails();
+                        stockDetails = new StockDetails();
                         stockDetails.CompanyCode = stockDetailsRequest.CompanyCode;
                         stockDetails.StockPrice = stockDetailsRequest.StockPrice;
                         stockDetails.StockMaxPrice = stockDetailsRequest.StockMaxPrice ?? 0;
@@ -63,7 +78,7 @@ namespace StockMarket.Stock.Repository.Service
         {
             try
             {
-                var stockInfo = _stockDetails.Find(d => d.IsDelete == 0 && d.CompanyCode==companyCode).ToList();
+                var stockInfo = _stockDetails.Find(d => d.IsDelete == 0 && d.CompanyCode == companyCode).ToList();
                 return stockInfo;
             }
             catch (Exception ex)
