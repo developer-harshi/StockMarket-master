@@ -155,6 +155,25 @@
     },
     {
 
+      "DownstreamPathTemplate": "/api/v1.0/market/fetch/{companyCode}/{startDate}/{endDate}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5002"
+        }
+      ],
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //},
+      "UpstreamPathTemplate": "/api/v1.0/market/fetch/{companyCode}/{startDate}/{endDate}",
+      "UpstreamHttpMethod": [ "GET", "POST" ],
+      "SwaggerKey": "Stock"
+
+    },
+    {
+
       "DownstreamPathTemplate": "/api/v1.0/market/stock/delete/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [

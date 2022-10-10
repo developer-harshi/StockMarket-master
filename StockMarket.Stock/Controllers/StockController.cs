@@ -66,8 +66,8 @@ namespace StockMarket.Stock.Controllers
             }
         }
 
-        [HttpGet("Fetch/{startDate}/{endDate}")]
-        public ActionResult GetStockDetails(DateTime startDate, DateTime endDate)
+        [HttpGet("fetch/{companyCode}/{startDate}/{endDate}")]
+        public ActionResult GetStockDetails(string companyCode,DateTime startDate, DateTime endDate)
         {
             try
             {
