@@ -25,5 +25,6 @@ namespace StockMarket.Stock.DTO.Request
         public DateTime? EndDate { get; set; }
         public string Id { get; set; }
         public int Index { get; set; }
+        public TimeSpan Time { get; set; }
     }
 }

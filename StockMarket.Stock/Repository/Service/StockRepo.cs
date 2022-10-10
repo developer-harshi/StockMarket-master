@@ -60,6 +60,7 @@ namespace StockMarket.Stock.Repository.Service
                         stockDetails.EndDate = stockDetailsRequest.EndDate;
                         stockDetails.IsDelete = 0;
                         stockDetails.InsertDate = DateTime.Now;
+                        stockDetails.Time = stockDetails.StartDate.Value.TimeOfDay;
                         _stockDetails.InsertOne(stockDetails);
                     }
 
