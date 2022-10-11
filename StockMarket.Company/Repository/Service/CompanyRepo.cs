@@ -12,14 +12,12 @@ namespace StockMarket.Company.Repository.Service
 
     public class CompanyRepo : ICompanyRepo
     {
-        private readonly IMongoCollection<CompanyDetails> _companyDetails;
-        private readonly IMongoCollection<StockDetails> _stockDetails;
+        private readonly IMongoCollection<CompanyDetails> _companyDetails;        
         public readonly IMongoCollection<User> _user;
         public CompanyRepo(IStockDatabaseSettings settings, IMongoClient mongoClient)
         {
             var database = mongoClient.GetDatabase(settings.DatabaseName);
-            _companyDetails = database.GetCollection<CompanyDetails>(settings.StockCollectionName);
-            _stockDetails = database.GetCollection<StockDetails>(settings.StockDetailsCollectionName);
+            _companyDetails = database.GetCollection<CompanyDetails>(settings.StockCollectionName);           
             _user= database.GetCollection<User>(settings.UserCollectionName);
         }
 
@@ -67,7 +65,9 @@ namespace StockMarket.Company.Repository.Service
             {
                 //var companyDetails = new CompanyDetailsResponse();
                 //CompanyDetailsResponseList companyDetailsList = new CompanyDetailsResponseList();
-                var company = _companyDetails.Find(u => u.CompanyCode == companyCode).ToList();
+                List<CompanyDetails> company = _companyDetails.Find(u => u.IsDelete == 0 && u.CompanyCode.ToLower().Contains((companyCode.ToLower()))).ToList();
+               
+
                 return company;
             }
             catch (Exception ex)
