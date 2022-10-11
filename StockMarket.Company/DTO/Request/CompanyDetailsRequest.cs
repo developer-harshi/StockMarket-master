@@ -14,7 +14,7 @@ namespace StockMarket.Company.DTO.Request
         [Required]
         public string CompanyCEO { get; set; }
         [Required]
-        public string CompanyTurnOver { get; set; }
+        public int CompanyTurnOver { get; set; }
         [Required]
         public string CompanyWebsite { get; set; }
 

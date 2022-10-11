@@ -60,7 +60,7 @@ namespace StockMarket.Stock.Repository.Service
                         stockDetails.EndDate = stockDetailsRequest.EndDate;
                         stockDetails.IsDelete = 0;
                         stockDetails.InsertDate = DateTime.Now;
-                        stockDetails.Time = stockDetails.StartDate.Value.TimeOfDay;
+                        stockDetails.Time = stockDetails.StartDate.TimeOfDay;
                         _stockDetails.InsertOne(stockDetails);
                     }
 
@@ -107,7 +107,12 @@ namespace StockMarket.Stock.Repository.Service
         {
             try
             {
-                var stockInfo = _stockDetails.Find(d => d.StartDate >= (DateTime?)startDate && d.EndDate <= (DateTime?)endDate).ToList();
+                List<StockDetails> stockInfo = new List<StockDetails>();
+                if (startDate != null && endDate != null)
+                {
+                    stockInfo = _stockDetails.Find(d => (DateTime)startDate <= d.StartDate && endDate >= d.StartDate).ToList();
+
+                }
                 return stockInfo;
             }
             catch (Exception ex)

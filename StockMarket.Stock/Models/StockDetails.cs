@@ -28,7 +28,7 @@ namespace StockMarket.Stock.Models
         public int? IsDelete { get; set; }
         public DateTime? InsertDate { get; set; }
         [Required]
-        public DateTime? StartDate { get; set; }
+        public DateTime StartDate { get; set; }
         //[Required]
         public DateTime? EndDate { get; set; }
         public TimeSpan Time { get; set; }
