@@ -118,6 +118,7 @@ namespace StockMarket.Stock
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseSwagger();
             app.UseSwaggerUI(options =>

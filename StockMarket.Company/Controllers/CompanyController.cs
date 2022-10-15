@@ -12,9 +12,10 @@ using System.Threading.Tasks;
 
 namespace StockMarket.Company.Controllers
 {
-
+    [Authorize]
     [Route("api/v1.0/market/company")]
     [ApiController]
+    
     public class CompanyController : ControllerBase
     {
         private readonly ICompanyService _companyService;
@@ -24,6 +25,7 @@ namespace StockMarket.Company.Controllers
             this._companyService = companyService;
             this._jwtAuthenticationManager = jwtAuthenticationManager;
         }
+        [AllowAnonymous]
         [HttpGet]
         public string Hello()
         {

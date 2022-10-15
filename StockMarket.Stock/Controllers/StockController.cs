@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StockMarket.Stock.DTO.Request;
 using StockMarket.Stock.Models;
 using StockMarket.Stock.Services.Interface;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace StockMarket.Stock.Controllers
 {
-   
+    [Authorize]
     [Route("api/v1.0/market/stock")]
     [ApiController]
     public class StockController : ControllerBase
