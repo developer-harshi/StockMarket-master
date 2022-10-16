@@ -92,5 +92,17 @@ namespace StockMarket.Stock.Controllers
                 return BadRequest(ex);
             }
         }
+        [HttpGet("deletebycode/{companyCode}")]
+        public ActionResult DeleteStockByCompanyCode(string id)
+        {
+            try
+            {
+                return Ok(_stockService.DeleteStockByCompanyCode(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
     }
 }

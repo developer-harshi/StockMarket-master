@@ -41,5 +41,10 @@ namespace StockMarket.Stock.Services.Servicee
         {
             return _stockRepo.GetEmptyStock();
         }
+
+        public bool DeleteStockByCompanyCode(string companyCode)
+        {
+            return _stockRepo.DeleteStockByCompanyCode(companyCode);
+        }
     }
 }

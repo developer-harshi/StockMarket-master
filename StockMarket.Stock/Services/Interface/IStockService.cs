@@ -17,5 +17,6 @@ namespace StockMarket.Stock.Services.Interface
 
         List<StockDetails> GetStockDetails(DateTime startDate, DateTime endDate);
         StockDetailsRequest GetEmptyStock();
+        bool DeleteStockByCompanyCode(string companyCode);
     }
 }

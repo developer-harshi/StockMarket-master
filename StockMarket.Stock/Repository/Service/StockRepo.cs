@@ -1,4 +1,6 @@
 ﻿using MongoDB.Driver;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using StockMarket.Stock.DbSettings.Interface;
 using StockMarket.Stock.DTO.Request;
 using StockMarket.Stock.Models;
@@ -6,6 +8,7 @@ using StockMarket.Stock.Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace StockMarket.Stock.Repository.Service
@@ -26,12 +29,12 @@ namespace StockMarket.Stock.Repository.Service
             {
                 List<StockDetails> lstStockDetails = _stockDetails.Find(d => d.CompanyCode == (listStockDetailsRequest.FirstOrDefault().CompanyCode)).ToList();
                 lstStockDetails = lstStockDetails == null ? new List<StockDetails>() : lstStockDetails;
-                if(lstStockDetails.Count>0)
+                if (lstStockDetails.Count > 0)
                 {
-                    foreach(var stock in lstStockDetails)
+                    foreach (var stock in lstStockDetails)
                     {
                         var stock1 = listStockDetailsRequest.Where(c => c.Id == stock.Id).FirstOrDefault();
-                        if(stock1==null)
+                        if (stock1 == null)
                         {
                             var deleteFilter = Builders<StockDetails>.Filter.Eq(e => e.Id, stock.Id);
                             _stockDetails.DeleteOne(deleteFilter);
@@ -128,6 +131,64 @@ namespace StockMarket.Stock.Repository.Service
             //stockDetailsRequest.Id = Guid.NewGuid().ToString();
             stockDetailsRequest.Index = 0;
             return stockDetailsRequest;
+        }
+        public bool DeleteStockByCompanyCode(string companyCode)
+        {
+            try
+            {
+                var deleteFilter = Builders<StockDetails>.Filter.Eq(e => e.CompanyCode, companyCode);
+                _stockDetails.DeleteOne(deleteFilter);
+                Consume(companyCode);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+        public bool Consume(string companyCode)
+        {
+            try
+            {
+                var factory = new ConnectionFactory
+                {
+                    Uri = new Uri("amqp://guest:guest@localhost:5672")
+                };
+                var connection = factory.CreateConnection();
+                var channel = connection.CreateModel();
+                Consume(channel);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public static void Consume(IModel channel)
+        {
+            try
+            {
+                channel.QueueDeclare("Company Delete",
+                    durable: true,
+                    exclusive: false,
+                    autoDelete: false,
+                    arguments: null);
+
+                var consumer = new EventingBasicConsumer(channel);
+                consumer.Received += (sender, e) =>
+                {
+                    var body = e.Body.ToArray();
+                    var message = Encoding.UTF8.GetString(body);
+                    Console.WriteLine(message);
+                };
+
+                channel.BasicConsume("Company Delete", true, consumer);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

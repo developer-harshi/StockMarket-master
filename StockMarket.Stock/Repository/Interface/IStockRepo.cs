@@ -18,6 +18,6 @@ namespace StockMarket.Stock.Repository.Interface
         List<StockDetails> GetStockDetails(DateTime startDate, DateTime endDate);
 
         StockDetailsRequest GetEmptyStock();
-
+        bool DeleteStockByCompanyCode(string companyCode);
     }
 }
