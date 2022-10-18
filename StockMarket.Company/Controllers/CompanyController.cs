@@ -31,7 +31,7 @@ namespace StockMarket.Company.Controllers
         {
             return "Hello from CompanyController API Service";
         }
-
+       
         [HttpPost("register")]
         public ActionResult Register(CompanyDetailsRequest company)
         {
@@ -85,6 +85,7 @@ namespace StockMarket.Company.Controllers
             }
         }
        
+        [AllowAnonymous]
         [HttpPost("adduser")]
         public ActionResult AddUser(User user)
         {
