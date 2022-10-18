@@ -252,7 +252,7 @@ namespace StockMarket.Company.Repository.Service
                 {"x-message-ttl", 30000 }
             };
             channel.ExchangeDeclare("demo-fanout-exchange", ExchangeType.Fanout, arguments: ttl);
-            var count = 0;
+            //var count = 0;
 
             var message = new { Name = "Producer", Message = $"CompanyCode: {companyCOde}" };
             var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
