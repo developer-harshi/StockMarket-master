@@ -42,7 +42,7 @@ namespace StockMarket.Stock
             services.AddCors();
             services.Configure<StockDatabaseSettings>(Configuration.GetSection(nameof(StockDatabaseSettings)));
             services.AddSingleton<IStockDatabaseSettings>(sp => sp.GetRequiredService<IOptions<StockDatabaseSettings>>().Value);
-            services.AddSingleton<IMongoClient>(s => new MongoClient(Configuration.GetValue<string>("StockDatabaseSettings:ConnectionString")));
+            services.AddSingleton<IMongoClient>(s => new MongoClient(Configuration.GetValue<string>("StockDatabaseSettings")));
             services.AddCors(c =>
             {
                 c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());

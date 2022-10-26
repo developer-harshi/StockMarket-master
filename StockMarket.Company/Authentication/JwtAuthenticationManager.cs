@@ -53,7 +53,7 @@ namespace StockMarket.Company.Authentication
             try
             {
 
-                MongoClient client = new MongoClient((Configuration.GetValue<string>("StockDatabaseSettings:ConnectionString")));
+                MongoClient client = new MongoClient((Configuration.GetValue<string>("StockDatabaseSettings")));
                 MongoServer server = client.GetServer();
                 MongoDatabase database = server.GetDatabase("StockCompany");
                 MongoCollection usercollection = database.GetCollection<User>("User");

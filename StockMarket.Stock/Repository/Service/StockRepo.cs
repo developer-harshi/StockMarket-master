@@ -19,8 +19,8 @@ namespace StockMarket.Stock.Repository.Service
 
         public StockRepo(IStockDatabaseSettings settings, IMongoClient mongoClient)
         {
-            var database = mongoClient.GetDatabase(settings.DatabaseName);
-            _stockDetails = database.GetCollection<StockDetails>(settings.StockDetailsCollectionName);
+            var database = mongoClient.GetDatabase("StockCompany");
+            _stockDetails = database.GetCollection<StockDetails>("StockPriceDetails");
         }
 
         public bool AddStockDetails(List<StockDetailsRequest> listStockDetailsRequest)

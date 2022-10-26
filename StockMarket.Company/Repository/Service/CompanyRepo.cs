@@ -20,9 +20,9 @@ namespace StockMarket.Company.Repository.Service
         public readonly IMongoCollection<User> _user;
         public CompanyRepo(IStockDatabaseSettings settings, IMongoClient mongoClient)
         {
-            var database = mongoClient.GetDatabase(settings.DatabaseName);
-            _companyDetails = database.GetCollection<CompanyDetails>(settings.StockCollectionName);
-            _user = database.GetCollection<User>(settings.UserCollectionName);
+            var database = mongoClient.GetDatabase("StockCompany");
+            _companyDetails = database.GetCollection<CompanyDetails>("Company");
+            _user = database.GetCollection<User>("User");
         }
 
 
